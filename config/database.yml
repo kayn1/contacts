@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: <%= ENV.fetch('PG_HOST', 'localhost') %>
+  port: <%= ENV.fetch('PG_PORT', 5432) %>
+  username: postgres
+  password: <%= ENV.fetch('PG_PASSWORD', 'password') %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: contacts_api_development
+
+test:
+  <<: *default
+  database: contacts_api_test
+
+production:
+  <<: *default
+  database: contacts_api_production
